@@ -1,24 +1,30 @@
 Package: worldtilegrid
 Type: Package
-Title: worldtilegrid title goes here otherwise CRAN checks fail
+Title: A ggplot2 Geom for World Tile Grids
 Version: 0.1.0
 Date: 2018-08-25
 Authors@R: c(
     person("Bob", "Rudis", email = "bob@rud.is", role = c("aut", "cre"), 
-           comment = c(ORCID = "0000-0001-5670-2640"))
+           comment = c(ORCID = "0000-0001-5670-2640")),
+    person("Maarten", "Lambrechts", role = "aut",
+           comment = "R WTG Data Creator"),
+    person("Jon", "Schwabish", role = "aut", comment = "Concept Originatior")
   )
 Maintainer: Bob Rudis <bob@rud.is>
-Description: A good description goes here otherwise CRAN checks fail.
+Description: A ggplot2 Geom for World Tile Grids
 URL: https://gitlab.com/hrbrmstr/worldtilegrid
 BugReports: https://gitlab.com/hrbrmstr/worldtilegrid/issues
 Encoding: UTF-8
 License: AGPL
 Suggests:
     testthat,
+    viridis,
+    RColorBrewer,
     covr
 Depends:
     R (>= 3.2.0)
 Imports:
-    httr,
-    jsonlite
+    ggplot2,
+    grid,
+    scales
 RoxygenNote: 6.0.1.9000
