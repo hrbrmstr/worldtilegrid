@@ -15,7 +15,7 @@ A ggplot2 Geom for World Tile Grids
 
 The following functions are implemented:
 
-- `geom_wtg`:	World Tile Grid Geom
+- `geom_wtg` / `stat_wtg`:	World Tile Grid Geom/Stat
 
 The following _data_ is included/exported:
 
@@ -35,19 +35,58 @@ options(width=120)
 
 ```{r message=FALSE, warning=FALSE, error=FALSE}
 library(worldtilegrid)
+library(tidyverse)
 
 # current verison
 packageVersion("worldtilegrid")
 
 ```
 
+### Example (All countries are in the data set)
 
-### Example
+```{r message=FALSE, warning=FALSE, error=FALSE, fig.width=10, fig.height=6, fig.retina=2}
+set.seed(1)
+data_frame(
+  ctry = worldtilegrid::wtg$alpha.3,
+  `Thing Val` = sample(1000, length(ctry))
+) -> xdf
 
-```{r message=FALSE, warning=FALSE, error=FALSE, fig.width=10, fig.height=6}
-library(worldtilegrid)
-library(tidyverse)
+ggplot(xdf, aes(country = ctry, fill = `Thing Val`)) +
+  geom_wtg() +
+  geom_text(aes(label = stat(alpha.2)), stat="wtg", size=2) + # re-compute the stat to label
+  coord_equal() +
+  viridis::scale_fill_viridis() +
+  labs(title = "World Tile Grid") +
+  hrbrthemes::theme_ft_rc(grid="") +
+  theme(panel.border = element_rect(color=hrbrthemes::ft_cols$white, fill="#00000000")) +
+  theme(axis.text = element_blank()) +
+  theme(legend.position = "bottom") 
+```
 
+### Example (Only a few countries are in the data set)
+
+```{r message=FALSE, warning=FALSE, error=FALSE, fig.width=6, fig.height=6, fig.retina=2}
+set.seed(1)
+data_frame(
+  ctry = worldtilegrid::wtg$alpha.3[1:30],
+  `Thing Val` = sample(1000, length(ctry))
+) -> xdf
+
+ggplot(xdf, aes(country = ctry, fill = `Thing Val`)) +
+  geom_wtg() +
+  geom_text(aes(label = stat(alpha.2)), stat="wtg", size=2) + # re-compute the stat to label
+  coord_equal() +
+  viridis::scale_fill_viridis() +
+  labs(title = "World Tile Grid") +
+  hrbrthemes::theme_ft_rc(grid="") +
+  theme(panel.border = element_rect(color=hrbrthemes::ft_cols$white, fill="#00000000")) +
+  theme(axis.text = element_blank()) +
+  theme(legend.position = "bottom") 
+```
+
+### Facet Example (All countries are in the data set)
+
+```{r message=FALSE, warning=FALSE, error=FALSE, fig.width=10, fig.height=6, fig.retina=2}
 set.seed(1)
 data_frame(
   ctry = worldtilegrid::wtg$alpha.3,
@@ -77,3 +116,39 @@ ggplot(xdf, aes(country = ctry, fill = `Thing Val`)) +
   theme(axis.text = element_blank()) +
   theme(legend.position = "bottom")
 ```
+
+### Facet Example (Only a few countries are in the data set)
+
+The geom will fill in the gaps for you:
+
+```{r message=FALSE, warning=FALSE, error=FALSE, fig.width=10, fig.height=6, fig.retina=2}
+set.seed(1)
+data_frame(
+  ctry = c("USA", "MEX", "CAN", "RUS", "BRA"),
+  `Thing Val` = sample(1000, length(ctry)),
+  grp = 'Thing One'
+) -> xdf1
+
+data_frame(
+  ctry = c("USA", "MEX", "CAN", "RUS", "BRA"),
+  `Thing Val` = sample(1000, length(ctry)),
+  grp = 'Thing Two'
+) -> xdf2
+
+bind_rows(
+  xdf1,
+  xdf2
+) -> xdf
+
+ggplot(xdf, aes(country = ctry, fill = `Thing Val`)) +
+  geom_wtg() +
+  coord_equal() +
+  facet_wrap(~grp) +
+  viridis::scale_fill_viridis(na.value = hrbrthemes::ft_cols$gray) +
+  labs(title = "World Tile Grid Facets") +
+  hrbrthemes::theme_ft_rc(grid="") +
+  theme(panel.border = element_rect(color=hrbrthemes::ft_cols$white, fill="#00000000")) +
+  theme(axis.text = element_blank()) +
+  theme(legend.position = "bottom")
+```
+
