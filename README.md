@@ -81,7 +81,7 @@ ggplot(xdf, aes(country = ctry, fill = `Thing Val`)) +
   theme(legend.position = "bottom") 
 ```
 
-<img src="README_files/figure-gfm/unnamed-chunk-5-1.png" width="576" />
+<img src="README_files/figure-gfm/unnamed-chunk-5-1.png" width="960" />
 
 ### Facet Example (All countries are in the data set)
 

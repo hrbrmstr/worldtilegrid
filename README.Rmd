@@ -65,7 +65,7 @@ ggplot(xdf, aes(country = ctry, fill = `Thing Val`)) +
 
 ### Example (Only a few countries are in the data set)
 
-```{r message=FALSE, warning=FALSE, error=FALSE, fig.width=6, fig.height=6, fig.retina=2}
+```{r message=FALSE, warning=FALSE, error=FALSE, fig.width=10, fig.height=6, fig.retina=2}
 set.seed(1)
 data_frame(
   ctry = worldtilegrid::wtg$alpha.3[1:30],
