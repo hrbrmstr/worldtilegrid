@@ -58,7 +58,7 @@ ggplot(xdf, aes(country = ctry, fill = `Thing Val`)) +
   theme(legend.position = "bottom") 
 ```
 
-<img src="README_files/figure-gfm/unnamed-chunk-4-1.png" width="960" />
+<img src="README_files/figure-gfm/unnamed-chunk-4-1.png" width="576" />
 
 ### Example (Only a few countries are in the data set)
 
@@ -81,7 +81,7 @@ ggplot(xdf, aes(country = ctry, fill = `Thing Val`)) +
   theme(legend.position = "bottom") 
 ```
 
-<img src="README_files/figure-gfm/unnamed-chunk-5-1.png" width="960" />
+<img src="README_files/figure-gfm/unnamed-chunk-5-1.png" width="576" />
 
 ### Facet Example (All countries are in the data set)
 
