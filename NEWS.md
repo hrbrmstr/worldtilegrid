@@ -5,6 +5,8 @@
 * theme enhancer
 * basic vignette
 * figure example in function help page
+* passes CRAN checks
+* tests
 
 0.1.0 
 * Initial release

@@ -40,9 +40,9 @@ A \code{function} will be called with a single argument,
 the plot data. The return value must be a \code{data.frame.}, and
 will be used as the layer data.}
 
-\item{border_col}{border color of the state squares, default "\code{white}"}
+\item{border_col}{border color of the country squares, default "\code{white}"}
 
-\item{border_size}{thickness of the square state borders}
+\item{border_size}{thickness of the square country borders}
 
 \item{na.rm}{If \code{FALSE}, the default, missing values are removed with
 a warning. If \code{TRUE}, missing values are silently removed.}
@@ -113,17 +113,20 @@ A sample of the output from \code{geom_wtg()}:
 }
 
 \examples{
+library(ggplot2)
+library(worldtilegrid)
 set.seed(1)
 data.frame(
   ctry = worldtilegrid::wtg$alpha.3,
-  al = sample(1000, length(worldtilegrid::wtg$alpha.3))
-) -> xdf1
+  val = sample(1000, length(worldtilegrid::wtg$alpha.3)),
+  stringsAsFactors = FALSE
+) -> xdf
 
 ggplot(xdf, aes(country = ctry, fill = val)) +
   geom_wtg() +
-  geom_text(aes(label = stat(alpha.2)), stat="wtg", size=2) + # re-compute the stat for labeling
+  geom_text(aes(label = stat(alpha.2)), stat="wtg", size=2) + # re-compute the stat to label
   coord_equal() +
-  viridis::scale_fill_viridis() +
+  viridis::scale_fill_viridis(direction = -1) +
   labs(title = "World Tile Grid") +
   theme_minimal() +
   theme_enhance_wtg()

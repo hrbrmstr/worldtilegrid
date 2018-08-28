@@ -59,6 +59,10 @@ ggplot(xdf, aes(country = ctry, fill = val)) +
 
 Note that you can use `theme_enhance_wtg()` with any theme since all it does is cruft removal.
 
+Also note that to add labels to the tiles, you _must_ use `stat_wtg()` so `geom_text()` has access to the `x` and `y` aesthetics as well as the `alpha.2` and `alpha.3` information (if you're going to use one of those for labels).
+
+Adding labels to the tiles is fraught with peril. Not doing so may be confusing for the vast majority fo the planet who are bereft of geographical knowledge. Doing so may make the colors you used hard to read or (worse) skew the color to an unintended shade. Adding labels to faceted world tile grid maps may make also them unreadable.
+
 ### Example (Only a few countries are in the data set)
 
 This is far from ideal since there are so few countries, but can come in handy if you're following a measure over time and some countries either did not exist at that time or had no measure for a given time period.
