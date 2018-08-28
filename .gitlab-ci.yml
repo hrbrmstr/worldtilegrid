@@ -1,8 +1,7 @@
-image: rocker/rstudio  
+image: rocker/tidyverse
 test:  
    script:
-    - apt-get install -y libgit2-dev
-    - R -e 'install.packages(c("ggplot2", "devtools", "scales", "viridis", "knitr", "rmarkdown", "testthat", "RColorBrewer", "covr"))'
+    - R -e 'install.packages("viridis", "knitr", "rmarkdown", "testthat", "RColorBrewer", "covr"))'
     - R CMD build . --no-build-vignettes --no-manual
     - PKG_FILE_NAME=$(ls -1t *.tar.gz | head -n 1)
     - R CMD check "${PKG_FILE_NAME}" --no-build-vignettes --no-manual
