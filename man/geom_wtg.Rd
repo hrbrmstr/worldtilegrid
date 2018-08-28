@@ -83,6 +83,21 @@ There are two special/critical \code{aes()} mappings:
 \item \code{fill} (which column you're mapping the filling for the squares with)
 }
 }
+\section{Output sample}{
+
+\if{html}{
+A sample of the output from \code{geom_wtg()}:
+
+\figure{geomwtg01.png}{alt="Figure: geomwtg01.png"}
+}
+
+\if{latex}{
+A sample of the output from \code{geom_wtg()}:
+
+\figure{geomwtg01.png}{options: width=20cm}
+}
+}
+
 \section{Computed variables}{
 
 \itemize{
@@ -98,11 +113,10 @@ There are two special/critical \code{aes()} mappings:
 }
 
 \examples{
-\dontrun{
 set.seed(1)
-data_frame(
+data.frame(
   ctry = worldtilegrid::wtg$alpha.3,
-  al = sample(1000, length(ctry))
+  al = sample(1000, length(worldtilegrid::wtg$alpha.3))
 ) -> xdf1
 
 ggplot(xdf, aes(country = ctry, fill = val)) +
@@ -111,10 +125,7 @@ ggplot(xdf, aes(country = ctry, fill = val)) +
   coord_equal() +
   viridis::scale_fill_viridis() +
   labs(title = "World Tile Grid") +
-  hrbrthemes::theme_ft_rc(grid="") +
-  theme(panel.border = element_rect(color=hrbrthemes::ft_cols$white, fill="#00000000")) +
-  theme(axis.text = element_blank()) +
-  theme(legend.position = "bottom")
+  theme_minimal() +
+  theme_enhance_wtg()
 }
-}
-\keyword{internal}
+\keyword{datasets}

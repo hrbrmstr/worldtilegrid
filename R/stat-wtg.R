@@ -19,35 +19,34 @@ stat_wtg <- function(mapping = NULL, data = NULL, na.rm = NA, show.legend = NA,
 }
 
 #' @rdname geom_wtg
-#' @keywords internal
 #' @export
 StatWtg <- ggproto(
-  "StatWtg", Stat,
+  `_class` = "StatWtg",
+  `_inherit` = ggplot2::Stat,
 
   required_aes = c("country", "fill"),
 
-  setup_params = function(data, params) {
-    params
-  },
-
   compute_layer = function(data, params, layout) {
+
+    data <- data[!sapply(data$country, is.na),]
 
     p <- split(data, data$PANEL)
 
-    lapply(p, function(.x) {
+    if (max(nchar(data[["country"]])) == 3) {
+      merge.x <- "alpha.3"
+    } else if (max(nchar(data[["country"]])) == 2) {
+      merge.x <- "alpha.2"
+    } else {
+      merge.x <- "name"
+    }
 
-      if (max(nchar(data[["country"]])) == 3) {
-        merge.x <- "alpha.3"
-      } else if (max(nchar(data[["country"]])) == 2) {
-        merge.x <- "alpha.2"
-      } else {
-        merge.x <- "name"
-      }
+    lapply(p, function(.x) {
 
       has <- unique(.x$country)
       has_not <- setdiff(wtg[[merge.x]], has)
 
       if (length(has_not) > 0) {
+
         data.frame(
           fill = NA,
           country = has_not,
@@ -57,11 +56,10 @@ StatWtg <- ggproto(
         ) -> to_bind
 
         .x <- rbind.data.frame(.x, to_bind)
+
       }
 
-      .x <- merge(.x, wtg, by.x="country", by.y=merge.x)
-
-      .x
+      merge(.x, wtg, by.x="country", by.y=merge.x)
 
     }) -> p
 
@@ -71,14 +69,6 @@ StatWtg <- ggproto(
       p[[1]]
     }
 
-  },
-
-  compute_panel = function(self, data, scales, ...) {
-    data
-  },
-
-  compute_group = function(data, scales, params) {
-    data
   }
 
 )

@@ -16,6 +16,19 @@
 #' - `country` (so the geom knows which column to map the country names/abbrevs to)
 #' - `fill` (which column you're mapping the filling for the squares with)
 #'
+#' @section Output sample:
+#' \if{html}{
+#' A sample of the output from \code{geom_wtg()}:
+#'
+#' \figure{geomwtg01.png}{alt="Figure: geomwtg01.png"}
+#' }
+#'
+#' \if{latex}{
+#' A sample of the output from \code{geom_wtg()}:
+#'
+#' \figure{geomwtg01.png}{options: width=20cm}
+#' }
+#'
 #' @section Computed variables:
 #' - `x`,`y`: the X,Y position of the tile
 #' - `name`: Country name (e.g. `Afghanistan`)
@@ -62,11 +75,11 @@
 #'   `color = "red"` or `size = 3`. They may also be parameters
 #'   to the paired geom/stat.
 #' @export
-#' @examples \dontrun{
+#' @examples
 #' set.seed(1)
-#' data_frame(
+#' data.frame(
 #'   ctry = worldtilegrid::wtg$alpha.3,
-#'   al = sample(1000, length(ctry))
+#'   al = sample(1000, length(worldtilegrid::wtg$alpha.3))
 #' ) -> xdf1
 #'
 #' ggplot(xdf, aes(country = ctry, fill = val)) +
@@ -75,11 +88,8 @@
 #'   coord_equal() +
 #'   viridis::scale_fill_viridis() +
 #'   labs(title = "World Tile Grid") +
-#'   hrbrthemes::theme_ft_rc(grid="") +
-#'   theme(panel.border = element_rect(color=hrbrthemes::ft_cols$white, fill="#00000000")) +
-#'   theme(axis.text = element_blank()) +
-#'   theme(legend.position = "bottom")
-#' }
+#'   theme_minimal() +
+#'   theme_enhance_wtg()
 geom_wtg <- function(
   mapping = NULL, data = NULL,
   border_col = "white", border_size = 0.125,
@@ -104,7 +114,6 @@ geom_wtg <- function(
 }
 
 #' @rdname geom_wtg
-#' @keywords internal
 #' @export
 GeomWtg <- ggplot2::ggproto(
   `_class` = "GeomWtg",
@@ -122,31 +131,25 @@ GeomWtg <- ggplot2::ggproto(
 
   setup_data = function(data, params) {
 
-    country_data <- data.frame(data, stringsAsFactors=FALSE)
+    wtg.dat <- data.frame(data, stringsAsFactors=FALSE)
 
-    if (max(nchar(country_data[["country"]])) == 3) {
+    if (max(nchar(wtg.dat[["country"]])) == 3) {
       merge.x <- "alpha.3"
-    } else if (max(nchar(country_data[["country"]])) == 2) {
+    } else if (max(nchar(wtg.dat[["country"]])) == 2) {
       merge.x <- "alpha.2"
     } else {
       merge.x <- "name"
     }
 
-    #country_data <- validate_countries(country_data, "country", merge.x, ignore_dups=TRUE)
-
-    # merge(
-    #   wtg, country_data, by.x=merge.x, by.y="country", all.x=TRUE, sort=TRUE
-    # ) -> wtg.dat
-    wtg.dat <- country_data
-
-    #wtg.dat$country <- wtg.dat[[merge.x]]
+    message("Using ", merge.x)
 
     wtg.dat$width <- wtg.dat$width %||% params$width %||% ggplot2::resolution(wtg.dat$x, FALSE)
     wtg.dat$height <- wtg.dat$height %||% params$height %||% ggplot2::resolution(wtg.dat$y, FALSE)
 
-    transform(wtg.dat,
-              xmin = x - width / 2,  xmax = x + width / 2,  width = NULL,
-              ymin = y - height / 2, ymax = y + height / 2, height = NULL
+    transform(
+      wtg.dat,
+      xmin = x - width / 2,  xmax = x + width / 2,  width = NULL,
+      ymin = y - height / 2, ymax = y + height / 2, height = NULL
     ) -> xdat
 
     xdat

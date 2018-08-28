@@ -1,0 +1,153 @@
+---
+title: "World Tile Grid Basic Usage"
+author: "Bob Rudis"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{World Tile Grid Basic Usage}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Usage
+
+```{r message=FALSE, warning=FALSE, error=FALSE}
+library(worldtilegrid)
+library(ggplot2)
+```
+
+### Example (All countries are in the data set)
+
+Ideally you'll always have a complete set of countries. You can use the built-in
+`wtg` data set to double check your own data set. It has the following structure:
+
+```{r echo=TRUE, eval=FALSE}
+str(wtg)
+```
+```{r echo=FALSE}
+str(wtg, give.attr = FALSE)
+```
+
+The `x` and `y` variables are the coordinates used by the underlying call(s) to `geom_tile()`.
+
+We'll make some synthetic data and perform a basic plot. The only requirements for `geom_wtg()` are a column to bind to the `country` aesthetic and a value to bind to the `fill` aeshetic. The package takes care of positioning.
+
+```{r message=FALSE, warning=FALSE, error=FALSE, fig.width=6, fig.height=6}
+set.seed(1)
+data.frame(
+  ctry = worldtilegrid::wtg$alpha.3,
+  val = sample(1000, length(worldtilegrid::wtg$alpha.3)),
+  stringsAsFactors = FALSE
+) -> xdf
+
+ggplot(xdf, aes(country = ctry, fill = val)) +
+  geom_wtg() +
+  geom_text(aes(label = stat(alpha.2)), stat="wtg", size=2) + # re-compute the stat to label
+  coord_equal() +
+  viridis::scale_fill_viridis(direction = -1) +
+  labs(title = "World Tile Grid") +
+  theme_minimal() +
+  theme_enhance_wtg()
+```
+
+Note that you can use `theme_enhance_wtg()` with any theme since all it does is cruft removal.
+
+### Example (Only a few countries are in the data set)
+
+This is far from ideal since there are so few countries, but can come in handy if you're following a measure over time and some countries either did not exist at that time or had no measure for a given time period.
+
+```{r message=FALSE, warning=FALSE, error=FALSE, fig.width=6, fig.height=6}
+set.seed(1)
+data.frame(
+  ctry = worldtilegrid::wtg$alpha.3[1:30],
+  val = sample(1000, length(worldtilegrid::wtg$alpha.3[1:30])),
+  stringsAsFactors = FALSE
+) -> xdf
+
+ggplot(xdf, aes(country = ctry, fill = val)) +
+  geom_wtg() +
+  geom_text(aes(label = stat(alpha.2)), stat="wtg", size=2) + # re-compute the stat to label
+  coord_equal() +
+  viridis::scale_fill_viridis(direction = -1) +
+  labs(title = "World Tile Grid") +
+  theme_minimal() +
+  theme_enhance_wtg()
+```
+
+### Facet Example (All countries are in the data set)
+
+Faceting works as normal since we're doing nothing very special. Consider readability when faceting these since individual world tile grids are already compact and reducing the tile sizes may end up losing the meaning of the fill colors.
+
+```{r message=FALSE, warning=FALSE, error=FALSE, fig.width=10, fig.height=6}
+set.seed(1)
+data.frame(
+  ctry = worldtilegrid::wtg$alpha.3,
+  val = sample(1000, length(worldtilegrid::wtg$alpha.3)),
+  grp = 'Thing One',
+  stringsAsFactors = FALSE
+) -> xdf1
+
+data.frame(
+  ctry = worldtilegrid::wtg$alpha.3,
+  val = sample(1000, length(worldtilegrid::wtg$alpha.3)),
+  grp = 'Thing Two',
+  stringsAsFactors = FALSE
+) -> xdf2
+
+rbind.data.frame(
+  xdf1,
+  xdf2
+) -> xdf
+
+ggplot(xdf, aes(country = ctry, fill = val)) +
+  geom_wtg() +
+  coord_equal() +
+  facet_wrap(~grp) +
+  viridis::scale_fill_viridis(direction = -1) +
+  labs(title = "World Tile Grid Facets") +
+  theme_minimal() +
+  theme_enhance_wtg()
+```
+
+### Facet Example (Only a few countries are in the data set)
+
+The geom will fill in the gaps for you:
+
+```{r message=FALSE, warning=FALSE, error=FALSE, fig.width=10, fig.height=6}
+set.seed(1)
+data.frame(
+  ctry = c("USA", "MEX", "CAN", "RUS", "BRA"),
+  val = sample(1000, length(c("USA", "MEX", "CAN", "RUS", "BRA"))),
+  grp = 'Thing One',
+  stringsAsFactors = FALSE
+) -> xdf1
+
+data.frame(
+  ctry = c("USA", "MEX", "CAN", "RUS", "BRA"),
+  val = sample(1000, length(c("USA", "MEX", "CAN", "RUS", "BRA"))),
+  grp = 'Thing Two',
+  stringsAsFactors = FALSE
+) -> xdf2
+
+rbind.data.frame(
+  xdf1,
+  xdf2
+) -> xdf
+
+ggplot(xdf, aes(country = ctry, fill = val)) +
+  geom_wtg() +
+  coord_equal() +
+  facet_wrap(~grp) +
+  viridis::scale_fill_viridis(direction = -1) +
+  labs(title = "World Tile Grid Facets") +
+  theme_minimal() +
+  theme_enhance_wtg()
+```
+

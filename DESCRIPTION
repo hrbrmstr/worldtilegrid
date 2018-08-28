@@ -7,20 +7,31 @@ Authors@R: c(
     person("Bob", "Rudis", email = "bob@rud.is", role = c("aut", "cre"), 
            comment = c(ORCID = "0000-0001-5670-2640")),
     person("Maarten", "Lambrechts", role = "aut",
-           comment = "R WTG Data Creator"),
-    person("Jon", "Schwabish", role = "aut", comment = "Concept Originatior")
+           comment = c("R/CSV WTG Data Creator",
+           ref = "http://www.maartenlambrechts.com/2017/10/22/tutorial-a-worldtilegrid-with-ggplot2.html")
+           ),
+    person("Jon", "Schwabish", role = "aut", 
+           comment = c("Concept Originatior", 
+           ref="https://policyviz.com/2017/10/12/the-world-tile-grid-map/")
+           )
   )
 Maintainer: Bob Rudis <bob@rud.is>
-Description: A ggplot2 Geom for World Tile Grids
+Description: A "tile grid map" is a cartogram that uses same-sized tiles
+    in approximate, relative positions of each other to represent a world 
+    map. The world tile grid relative position reference system used by
+    this 'ggplot2' 'Geom/Stat' was the original work of 'Jon Schwabish' and 
+    converted to 'CSV' by 'Maarten Lambrechts'.
 URL: https://gitlab.com/hrbrmstr/worldtilegrid
 BugReports: https://gitlab.com/hrbrmstr/worldtilegrid/issues
 Encoding: UTF-8
-License: AGPL
+License: MIT + file LICENSE
 Suggests:
     testthat,
     viridis,
     RColorBrewer,
-    covr
+    covr,
+    knitr,
+    rmarkdown
 Depends:
     R (>= 3.2.0)
 Imports:
@@ -28,3 +39,4 @@ Imports:
     grid,
     scales
 RoxygenNote: 6.0.1.9000
+VignetteBuilder: knitr

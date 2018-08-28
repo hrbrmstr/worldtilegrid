@@ -8,6 +8,8 @@ A ggplot2 Geom for World Tile Grids
 
 ## Description
 
+A "tile grid map" is a cartogram that uses same-sized tiles in approximate, relative positions of each other to represent a world map. The world tile grid relative position reference system used by this 'ggplot2' 'Geom/Stat' was the original work of 'Jon Schwabish' and converted to 'CSV' by 'Maarten Lambrechts'.
+
 - Ref: <https://policyviz.com/2017/10/12/the-world-tile-grid-map/>
 - Ref: <http://www.maartenlambrechts.com/2017/10/22/tutorial-a-worldtilegrid-with-ggplot2.html>
 
@@ -16,6 +18,7 @@ A ggplot2 Geom for World Tile Grids
 The following functions are implemented:
 
 - `geom_wtg` / `stat_wtg`:	World Tile Grid Geom/Stat
+- `theme_enhance_wtg`	World tile grid theme cruft remover that can be used with any other theme
 
 The following _data_ is included/exported:
 
@@ -57,10 +60,8 @@ ggplot(xdf, aes(country = ctry, fill = `Thing Val`)) +
   coord_equal() +
   viridis::scale_fill_viridis() +
   labs(title = "World Tile Grid") +
-  hrbrthemes::theme_ft_rc(grid="") +
-  theme(panel.border = element_rect(color=hrbrthemes::ft_cols$white, fill="#00000000")) +
-  theme(axis.text = element_blank()) +
-  theme(legend.position = "bottom") 
+  hrbrthemes::theme_ft_rc() +
+  theme_enhance_wtg()
 ```
 
 ### Example (Only a few countries are in the data set)
@@ -78,10 +79,8 @@ ggplot(xdf, aes(country = ctry, fill = `Thing Val`)) +
   coord_equal() +
   viridis::scale_fill_viridis() +
   labs(title = "World Tile Grid") +
-  hrbrthemes::theme_ft_rc(grid="") +
-  theme(panel.border = element_rect(color=hrbrthemes::ft_cols$white, fill="#00000000")) +
-  theme(axis.text = element_blank()) +
-  theme(legend.position = "bottom") 
+  hrbrthemes::theme_ft_rc() +
+  theme_enhance_wtg()
 ```
 
 ### Facet Example (All countries are in the data set)
@@ -111,10 +110,8 @@ ggplot(xdf, aes(country = ctry, fill = `Thing Val`)) +
   facet_wrap(~grp) +
   viridis::scale_fill_viridis() +
   labs(title = "World Tile Grid Facets") +
-  hrbrthemes::theme_ft_rc(grid="") +
-  theme(panel.border = element_rect(color=hrbrthemes::ft_cols$white, fill="#00000000")) +
-  theme(axis.text = element_blank()) +
-  theme(legend.position = "bottom")
+  hrbrthemes::theme_ft_rc() +
+  theme_enhance_wtg()
 ```
 
 ### Facet Example (Only a few countries are in the data set)
@@ -146,9 +143,7 @@ ggplot(xdf, aes(country = ctry, fill = `Thing Val`)) +
   facet_wrap(~grp) +
   viridis::scale_fill_viridis(na.value = hrbrthemes::ft_cols$gray) +
   labs(title = "World Tile Grid Facets") +
-  hrbrthemes::theme_ft_rc(grid="") +
-  theme(panel.border = element_rect(color=hrbrthemes::ft_cols$white, fill="#00000000")) +
-  theme(axis.text = element_blank()) +
-  theme(legend.position = "bottom")
+  hrbrthemes::theme_ft_rc() +
+  theme_enhance_wtg()
 ```
 
