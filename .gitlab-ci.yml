@@ -1,8 +1,12 @@
-image: rocker/rstudio  
-test:  
+variables:
+  CRAN_MIRROR: "https://cloud.r-project.org"
+  _R_CHECK_FORCE_SUGGESTS_: "FALSE"
+
+ image: registry.gitlab.com/jangorecki/dockerfiles/r-builder
+ test:  
    script:
-    - R -e 'install.packages(c("ggplot2", "scales", "viridis", "knitr", "rmarkdown", "testthat", "RColorBrewer", "covr"))'
+    - Rscript -e 'install.packages(c("ggplot2", "devtools", "scales", "viridis", "knitr", "rmarkdown", "testthat", "RColorBrewer", "covr"))'
     - R CMD build . --no-build-vignettes --no-manual
     - PKG_FILE_NAME=$(ls -1t *.tar.gz | head -n 1)
     - R CMD check "${PKG_FILE_NAME}" --no-build-vignettes --no-manual
-    - R -e 'devtools::test()'
+    - Rscript -e 'devtools::test()'
