@@ -42,7 +42,7 @@ devtools::install_github("hrbrmstr/worldtilegrid")
 library(worldtilegrid)
 library(tidyverse)
 
-# current verison
+# current version
 packageVersion("worldtilegrid")
 ```
 
