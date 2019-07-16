@@ -5,7 +5,7 @@ editor_options:
 ---
 [![Travis-CI Build Status](https://travis-ci.org/hrbrmstr/worldtilegrid.svg?branch=master)](https://travis-ci.org/hrbrmstr/worldtilegrid)
 
-# worldtilegrid [WIP]
+# worldtilegrid
 
 A ggplot2 Geom for World Tile Grids
 
@@ -20,8 +20,8 @@ A "tile grid map" is a cartogram that uses same-sized tiles in approximate, rela
 
 The following functions are implemented:
 
-```{r install-ex, results='asis', echo = FALSE}
-hrbrpkghelpr::install_block()
+```{r ingredients, results='asis', echo=FALSE, cache=FALSE}
+hrbrpkghelpr::describe_ingredients()
 ```
 
 The following _data_ is included/exported:
@@ -30,8 +30,8 @@ The following _data_ is included/exported:
 
 ## Installation
 
-```{r ingredients, results='asis', echo=FALSE, cache=FALSE}
-hrbrpkghelpr::describe_ingredients()
+```{r install-ex, results='asis', echo = FALSE}
+hrbrpkghelpr::install_block()
 ```
 
 ```{r message=FALSE, warning=FALSE, error=FALSE, include=FALSE}

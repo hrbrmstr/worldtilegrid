@@ -24,7 +24,7 @@ test_that("wtg data joins properly", {
   suppressMessages(gb <- ggplot_build(gg))
 
   expect_equal(length(gb$data), 2)
-  expect_identical(dim(gb$data[[1]]), c(192L, 24L))
+  expect_identical(dim(gb$data[[1]]), c(192L, 26L))
   expect_identical(dim(gb$data[[2]]), c(192L, 24L))
   expect_identical(gb$data[[1]]$group, gb$data[[2]]$group)
 

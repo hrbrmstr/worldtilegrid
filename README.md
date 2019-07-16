@@ -22,15 +22,10 @@ converted to ‘CSV’ by ‘Maarten Lambrechts’.
 
 The following functions are implemented:
 
-``` r
-devtools::install_git("https://git.rud.is/hrbrmstr/worldtilegrid.git")
-# or
-devtools::install_git("https://git.sr.ht/~hrbrmstr/worldtilegrid")
-# or
-devtools::install_gitlab("hrbrmstr/worldtilegrid")
-# or
-devtools::install_github("hrbrmstr/worldtilegrid")
-```
+  - `geom_wtg`: World Tile Grid Geom
+  - `theme_enhance_wtg`: World tile grid theme cruft remover that can be
+    used with any other theme
+  - `wtg`: World Tile Grid Basemap Data
 
 The following *data* is included/exported:
 
@@ -38,10 +33,19 @@ The following *data* is included/exported:
 
 ## Installation
 
-  - `geom_wtg`: World Tile Grid Geom
-  - `theme_enhance_wtg`: World tile grid theme cruft remover that can be
-    used with any other theme
-  - `wtg`: World Tile Grid Basemap Data
+``` r
+install.packages("worldtilegrid", repos = "https://cinc.rud.is")
+# or
+devtools::install_git("https://git.rud.is/hrbrmstr/worldtilegrid.git")
+# or
+devtools::install_git("https://git.sr.ht/~hrbrmstr/worldtilegrid")
+# or
+devtools::install_gitlab("hrbrmstr/worldtilegrid")
+# or
+devtools::install_bitbucket("hrbrmstr/worldtilegrid")
+# or
+devtools::install_github("hrbrmstr/worldtilegrid")
+```
 
 ## Usage
 
