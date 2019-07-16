@@ -28,7 +28,7 @@ StatWtg <- ggproto(
 
   compute_layer = function(data, params, layout) {
 
-    data <- data[!sapply(data$country, is.na),]
+    data <- data[!sapply(data$country, is.na, USE.NAMES = FALSE),]
 
     p <- split(data, data$PANEL)
 
@@ -55,7 +55,7 @@ StatWtg <- ggproto(
           stringsAsFactors = FALSE
         ) -> to_bind
 
-        .x <- rbind.data.frame(.x, to_bind)
+        .x <- plyr::rbind.fill(.x, to_bind)
 
       }
 
@@ -64,7 +64,7 @@ StatWtg <- ggproto(
     }) -> p
 
     if (length(p) > 1) {
-      do.call(rbind.data.frame, p)
+      plyr::rbind.fill(p)
     } else {
       p[[1]]
     }

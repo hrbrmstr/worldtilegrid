@@ -16,9 +16,15 @@ converted to 'CSV' by 'Maarten Lambrechts'.
 \itemize{
 \item Ref: \url{https://policyviz.com/2017/10/12/the-world-tile-grid-map/}
 \item Ref: \url{http://www.maartenlambrechts.com/2017/10/22/tutorial-a-worldtilegrid-with-ggplot2.html}
-\item URL: \url{https://gitlab.com/hrbrmstr/worldtilegrid}
-\item BugReports: \url{https://gitlab.com/hrbrmstr/worldtilegrid/issues}
 }
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://gitlab.com/hrbrmstr/worldtilegrid}
+  \item Report bugs at \url{https://gitlab.com/hrbrmstr/worldtilegrid/issues}
+}
+
 }
 \author{
 Bob Rudis (bob@rud.is)

@@ -130,11 +130,15 @@ GeomWtg <- ggplot2::ggproto(
 
   required_aes = c("country", "fill"),
 
-  extra_params = c("na.rm", "width", "height"),
+  extra_params = c("na.rm", "width", "height", "border_col", "border_size"),
 
   setup_data = function(data, params) {
 
     wtg.dat <- data.frame(data, stringsAsFactors=FALSE)
+    wtg.dat$border_col <- params$border_col %||% data$border_col %||%
+      params$colour %||% data$colour %||% NA
+    wtg.dat$border_size <- params$border_size %||% data$border_size %||%
+      params$size %||% data$size %||% NA
 
     if (max(nchar(wtg.dat[["country"]])) == 3) {
       merge.x <- "alpha.3"
@@ -163,8 +167,9 @@ GeomWtg <- ggplot2::ggproto(
                         border_col = "white", border_size = 0.125) {
 
     tile_data <- data
-    tile_data$size <- border_size
-    tile_data$colour <- border_col
+
+    tile_data$size <- data$border_size
+    tile_data$colour <- data$border_col
 
     coord <- ggplot2::coord_equal()
 

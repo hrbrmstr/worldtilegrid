@@ -1,19 +1,15 @@
 Package: worldtilegrid
 Type: Package
 Title: A ggplot2 Geom for World Tile Grids
-Version: 0.1.0
-Date: 2018-08-25
+Version: 0.2.0
+Date: 2019-07-25
 Authors@R: c(
     person("Bob", "Rudis", email = "bob@rud.is", role = c("aut", "cre"), 
            comment = c(ORCID = "0000-0001-5670-2640")),
     person("Maarten", "Lambrechts", role = "aut",
-           comment = c("R/CSV WTG Data Creator",
-           ref = "http://www.maartenlambrechts.com/2017/10/22/tutorial-a-worldtilegrid-with-ggplot2.html")
-           ),
+           comment = c("R/CSV WTG Data Creator")),
     person("Jon", "Schwabish", role = "aut", 
-           comment = c("Concept Originatior", 
-           ref="https://policyviz.com/2017/10/12/the-world-tile-grid-map/")
-           )
+           comment = c("Concept Originatior"))
   )
 Maintainer: Bob Rudis <bob@rud.is>
 Description: A "tile grid map" is a cartogram that uses same-sized tiles
@@ -37,6 +33,7 @@ Depends:
 Imports:
     ggplot2,
     grid,
-    scales
-RoxygenNote: 6.0.1.9000
+    scales,
+    plyr
+RoxygenNote: 6.1.1
 VignetteBuilder: knitr

@@ -1,5 +1,7 @@
 ---
 output: rmarkdown::github_document
+editor_options: 
+  chunk_output_type: console
 ---
 [![Travis-CI Build Status](https://travis-ci.org/hrbrmstr/worldtilegrid.svg?branch=master)](https://travis-ci.org/hrbrmstr/worldtilegrid)
 
@@ -18,8 +20,9 @@ A "tile grid map" is a cartogram that uses same-sized tiles in approximate, rela
 
 The following functions are implemented:
 
-- `geom_wtg` / `stat_wtg`:	World Tile Grid Geom/Stat
-- `theme_enhance_wtg`	World tile grid theme cruft remover that can be used with any other theme
+```{r install-ex, results='asis', echo = FALSE}
+hrbrpkghelpr::install_block()
+```
 
 The following _data_ is included/exported:
 
@@ -27,8 +30,8 @@ The following _data_ is included/exported:
 
 ## Installation
 
-```{r eval=FALSE}
-devtools::install_github("hrbrmstr/worldtilegrid")
+```{r ingredients, results='asis', echo=FALSE, cache=FALSE}
+hrbrpkghelpr::describe_ingredients()
 ```
 
 ```{r message=FALSE, warning=FALSE, error=FALSE, include=FALSE}
@@ -48,16 +51,24 @@ packageVersion("worldtilegrid")
 
 ### Example (All countries are in the data set)
 
-```{r message=FALSE, warning=FALSE, error=FALSE, fig.width=6, fig.height=6, fig.retina=2}
+```{r message=FALSE, warning=FALSE, error=FALSE, fig.width=8, fig.height=8, fig.retina=2}
+iso3cs <- worldtilegrid::wtg$alpha.3
+
 set.seed(1)
 data_frame(
-  ctry = worldtilegrid::wtg$alpha.3,
+  ctry = iso3cs,
   `Thing Val` = sample(1000, length(ctry))
 ) -> xdf
 
 ggplot(xdf, aes(country = ctry, fill = `Thing Val`)) +
-  geom_wtg() +
-  geom_text(aes(label = stat(alpha.2)), stat="wtg", size=2) + # re-compute the stat to label
+  geom_wtg(border_size = 0.5, border_col = "#252a32") +
+  geom_text(
+    aes(
+      label = stat(alpha.2), 
+      colour = I(ifelse(`Thing Val` < 500, "white", "black"))
+    ), 
+    stat = "wtg", size = 2
+  ) + 
   coord_equal() +
   viridis::scale_fill_viridis() +
   labs(title = "World Tile Grid") +
@@ -67,7 +78,7 @@ ggplot(xdf, aes(country = ctry, fill = `Thing Val`)) +
 
 ### Example (Only a few countries are in the data set)
 
-```{r message=FALSE, warning=FALSE, error=FALSE, fig.width=6, fig.height=6, fig.retina=2}
+```{r message=FALSE, warning=FALSE, error=FALSE, fig.width=8, fig.height=8, fig.retina=2}
 set.seed(1)
 data_frame(
   ctry = worldtilegrid::wtg$alpha.3[1:30],
@@ -76,7 +87,13 @@ data_frame(
 
 ggplot(xdf, aes(country = ctry, fill = `Thing Val`)) +
   geom_wtg() +
-  geom_text(aes(label = stat(alpha.2)), stat="wtg", size=2) + # re-compute the stat to label
+  geom_text(
+    aes(
+      label = stat(alpha.2),
+      colour = I(ifelse(`Thing Val` < 400, "#b2b2b2", "#2b2b2b"))
+    ), 
+    stat="wtg", size=2
+  ) + 
   coord_equal() +
   viridis::scale_fill_viridis() +
   labs(title = "World Tile Grid") +
@@ -121,14 +138,14 @@ The geom will fill in the gaps for you:
 
 ```{r message=FALSE, warning=FALSE, error=FALSE, fig.width=10, fig.height=6, fig.retina=2}
 set.seed(1)
-data_frame(
-  ctry = c("USA", "MEX", "CAN", "RUS", "BRA"),
+tibble(
+  ctry = sample(iso3cs, 40),
   `Thing Val` = sample(1000, length(ctry)),
   grp = 'Thing One'
 ) -> xdf1
 
-data_frame(
-  ctry = c("USA", "MEX", "CAN", "RUS", "BRA"),
+tibble(
+  ctry = sample(iso3cs, 40),
   `Thing Val` = sample(1000, length(ctry)),
   grp = 'Thing Two'
 ) -> xdf2
@@ -139,12 +156,20 @@ bind_rows(
 ) -> xdf
 
 ggplot(xdf, aes(country = ctry, fill = `Thing Val`)) +
-  geom_wtg() +
+  geom_wtg(border_size = 0.5) +
   coord_equal() +
   facet_wrap(~grp) +
-  viridis::scale_fill_viridis(na.value = hrbrthemes::ft_cols$gray) +
+  scale_fill_viridis_c(
+    na.value = alpha(hrbrthemes::ft_cols$gray, 2/5), direction = -1,
+    option = "magma"
+  ) +
+  guides(
+    fill = guide_colourbar(title.position = "top", title.hjust = 0.5)
+  ) +
   labs(title = "World Tile Grid Facets") +
-  hrbrthemes::theme_ft_rc() +
-  theme_enhance_wtg()
+  hrbrthemes::theme_ipsum_rc() +
+  theme_enhance_wtg() +
+  theme(legend.position = "bottom") +
+  theme(legend.key.width = unit(2, "lines"))
 ```
 

@@ -4,7 +4,13 @@
 \alias{theme_enhance_wtg}
 \title{World tile grid theme cruft remover that can be used with any other theme}
 \usage{
-theme_enhance_wtg()
+theme_enhance_wtg(move_legend = FALSE)
+}
+\arguments{
+\item{move_legend}{if \code{TRUE} will move the legend to c(0.2, 0.2) and make it
+horizontal as well as give it a width of 2 lines. You should add a call
+to \code{guides(fill = guide_colourbar(title.position="top"))} and, perhaps,
+center the legend title. Default is \code{FALSE} for backwards compatibility.}
 }
 \description{
 Removes:
