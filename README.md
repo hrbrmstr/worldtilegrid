@@ -2,7 +2,7 @@
 [![Travis-CI Build
 Status](https://travis-ci.org/hrbrmstr/worldtilegrid.svg?branch=master)](https://travis-ci.org/hrbrmstr/worldtilegrid)
 
-# worldtilegrid \[WIP\]
+# worldtilegrid
 
 A ggplot2 Geom for World Tile Grids
 
