@@ -1,6 +1,9 @@
 
 [![Travis-CI Build
 Status](https://travis-ci.org/hrbrmstr/worldtilegrid.svg?branch=master)](https://travis-ci.org/hrbrmstr/worldtilegrid)
+[![Coverage
+Status](https://codecov.io/gh/hrbrmstr/worldtilegrid/branch/master/graph/badge.svg)](https://codecov.io/gh/hrbrmstr/worldtilegrid)
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/worldtilegrid)](https://cran.r-project.org/package=worldtilegrid)
 
 # worldtilegrid
 
@@ -55,9 +58,8 @@ library(tidyverse)
 
 # current verison
 packageVersion("worldtilegrid")
+## [1] '0.2.0'
 ```
-
-    ## [1] '0.2.0'
 
 ### Example (All countries are in the data set)
 
@@ -86,7 +88,7 @@ ggplot(xdf, aes(country = ctry, fill = `Thing Val`)) +
   theme_enhance_wtg()
 ```
 
-<img src="README_files/figure-gfm/unnamed-chunk-3-1.png" width="768" />
+<img src="man/figures/README-unnamed-chunk-2-1.png" width="768" />
 
 ### Example (Only a few countries are in the data set)
 
@@ -113,7 +115,7 @@ ggplot(xdf, aes(country = ctry, fill = `Thing Val`)) +
   theme_enhance_wtg()
 ```
 
-<img src="README_files/figure-gfm/unnamed-chunk-4-1.png" width="768" />
+<img src="man/figures/README-unnamed-chunk-3-1.png" width="768" />
 
 ### Facet Example (All countries are in the data set)
 
@@ -146,7 +148,7 @@ ggplot(xdf, aes(country = ctry, fill = `Thing Val`)) +
   theme_enhance_wtg()
 ```
 
-<img src="README_files/figure-gfm/unnamed-chunk-5-1.png" width="960" />
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="960" />
 
 ### Facet Example (Only a few countries are in the data set)
 
@@ -189,4 +191,4 @@ ggplot(xdf, aes(country = ctry, fill = `Thing Val`)) +
   theme(legend.key.width = unit(2, "lines"))
 ```
 
-<img src="README_files/figure-gfm/unnamed-chunk-6-1.png" width="960" />
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="960" />

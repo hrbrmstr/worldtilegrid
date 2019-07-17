@@ -3,7 +3,17 @@ output: rmarkdown::github_document
 editor_options: 
   chunk_output_type: console
 ---
-[![Travis-CI Build Status](https://travis-ci.org/hrbrmstr/worldtilegrid.svg?branch=master)](https://travis-ci.org/hrbrmstr/worldtilegrid)
+```{r pkg-knitr-opts, include=FALSE}
+knitr::opts_chunk$set(
+  collapse=TRUE, fig.retina=2, message=FALSE, warning=FALSE,
+  fig.path = "man/figures/README-"
+)
+options(width=120)
+```
+
+[![Travis-CI Build Status](https://travis-ci.org/hrbrmstr/worldtilegrid.svg?branch=master)](https://travis-ci.org/hrbrmstr/worldtilegrid) 
+[![Coverage Status](https://codecov.io/gh/hrbrmstr/worldtilegrid/branch/master/graph/badge.svg)](https://codecov.io/gh/hrbrmstr/worldtilegrid)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/worldtilegrid)](https://cran.r-project.org/package=worldtilegrid)
 
 # worldtilegrid
 
@@ -32,10 +42,6 @@ The following _data_ is included/exported:
 
 ```{r install-ex, results='asis', echo = FALSE}
 hrbrpkghelpr::install_block()
-```
-
-```{r message=FALSE, warning=FALSE, error=FALSE, include=FALSE}
-options(width=120)
 ```
 
 ## Usage
