@@ -3,37 +3,23 @@ Type: Package
 Title: A ggplot2 Geom for World Tile Grids
 Version: 0.2.0
 Date: 2019-07-25
-Authors@R: c(
-    person("Bob", "Rudis", email = "bob@rud.is", role = c("aut", "cre"), 
-           comment = c(ORCID = "0000-0001-5670-2640")),
-    person("Maarten", "Lambrechts", role = "aut",
-           comment = c("R/CSV WTG Data Creator")),
-    person("Jon", "Schwabish", role = "aut", 
-           comment = c("Concept Originatior"))
-  )
+Authors@R: c( person("Bob", "Rudis", email = "bob@rud.is", role = c("aut",
+        "cre"), comment = c(ORCID = "0000-0001-5670-2640")),
+        person("Maarten", "Lambrechts", role = "aut", comment = c("R/CSV
+        WTG Data Creator")), person("Jon", "Schwabish", role = "aut",
+        comment = c("Concept Originatior")) )
 Maintainer: Bob Rudis <bob@rud.is>
-Description: A "tile grid map" is a cartogram that uses same-sized tiles
-    in approximate, relative positions of each other to represent a world 
-    map. The world tile grid relative position reference system used by
-    this 'ggplot2' 'Geom/Stat' was the original work of 'Jon Schwabish' and 
-    converted to 'CSV' by 'Maarten Lambrechts'.
+Description: A "tile grid map" is a cartogram that uses same-sized tiles in
+        approximate, relative positions of each other to represent a world
+        map. The world tile grid relative position reference system used by
+        this 'ggplot2' 'Geom/Stat' was the original work of 'Jon Schwabish'
+        and converted to 'CSV' by 'Maarten Lambrechts'.
 URL: https://gitlab.com/hrbrmstr/worldtilegrid
 BugReports: https://gitlab.com/hrbrmstr/worldtilegrid/issues
 Encoding: UTF-8
 License: MIT + file LICENSE
-Suggests:
-    testthat,
-    viridis,
-    RColorBrewer,
-    covr,
-    knitr,
-    rmarkdown
-Depends:
-    R (>= 3.2.0)
-Imports:
-    ggplot2,
-    grid,
-    scales,
-    plyr
+Suggests: viridis, RColorBrewer, covr, knitr, rmarkdown, tinytest
+Depends: R (>= 3.2.0)
+Imports: ggplot2, grid, scales, plyr
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr
